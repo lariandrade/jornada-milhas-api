@@ -47,7 +47,7 @@ public class DepoimentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity atualizar(@PathVariable Integer id, @RequestBody DadosAtualizacaoDepoimento dados) {
+    public ResponseEntity atualizar(@PathVariable Integer id, @RequestBody @Valid DadosAtualizacaoDepoimento dados) {
         ResponseEntity<String> response;
         try {
             DadosDetalhamentoDepoimentoDTO dadosDetalhamentoCadastro = depoimentoService.update(id, dados);
