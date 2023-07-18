@@ -1,5 +1,6 @@
 package com.challenge.jornadamilhasapi.services;
 
+import com.challenge.jornadamilhasapi.dtos.DadosAtualizacaoDepoimento;
 import com.challenge.jornadamilhasapi.dtos.DadosCadastroDepoimentoDTO;
 import com.challenge.jornadamilhasapi.dtos.DadosDetalhamentoDepoimentoDTO;
 import com.challenge.jornadamilhasapi.models.Depoimento;
@@ -28,6 +29,15 @@ public class DepoimentoService {
 
     public Optional<Depoimento> findById(Integer id) {
         return depoimentoRepository.findById(id);
+    }
+
+    public DadosDetalhamentoDepoimentoDTO update(Integer id, DadosAtualizacaoDepoimento dados) {
+        Optional<Depoimento> depoimentoOP = depoimentoRepository.findById(id);
+        Depoimento depoimento = depoimentoOP.get();
+        depoimento.setDepoimento(dados.depoimento());
+        depoimentoRepository.save(depoimento);
+
+        return new DadosDetalhamentoDepoimentoDTO(depoimento);
     }
 
     public void delete(Depoimento depoimento) {
