@@ -29,4 +29,9 @@ public class DepoimentoService {
     public Optional<Depoimento> findById(Integer id) {
         return depoimentoRepository.findById(id);
     }
+
+    public void delete(Depoimento depoimento) {
+        depoimentoRepository.delete(depoimento);
+    }
+
 }

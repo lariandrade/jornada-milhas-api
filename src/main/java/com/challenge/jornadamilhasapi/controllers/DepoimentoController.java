@@ -44,7 +44,13 @@ public class DepoimentoController {
         return ResponseEntity.status(HttpStatus.OK).body(depoimento);
     }
 
-
-
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleta(@PathVariable Integer id) {
+        Optional<Depoimento> depoimento = depoimentoService.findById(id);
+        if (depoimento.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Depoimento não encontrado");
+        }
+        depoimentoService.delete(depoimento.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Depoimento deletado com sucesso.");
+    }
 }
