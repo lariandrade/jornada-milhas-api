@@ -1,4 +1,6 @@
 package com.challenge.jornadamilhasapi.dtos;
 
-public record DadosAtualizacaoDepoimento(String depoimento) {
+import jakarta.validation.constraints.NotBlank;
+
+public record DadosAtualizacaoDepoimento(@NotBlank String depoimento) {
 }
