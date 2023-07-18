@@ -28,6 +28,11 @@ public class DepoimentoController {
     @GetMapping
     public ResponseEntity listaTodos() {
         List<Depoimento> depoimentos = depoimentoService.findall();
+
+        if(depoimentos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum depoimento cadastrado.");
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(depoimentos);
     }
 }
