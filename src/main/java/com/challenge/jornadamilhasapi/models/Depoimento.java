@@ -10,6 +10,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "depoimentos")
 @Data
+@NoArgsConstructor
 public class Depoimento {
 
     @Id
