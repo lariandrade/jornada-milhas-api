@@ -1,0 +1,33 @@
+package com.challenge.jornadamilhasapi.controllers;
+
+import com.challenge.jornadamilhasapi.dtos.DadosCadastroDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.DadosDetalhamentoDepoimentoDTO;
+import com.challenge.jornadamilhasapi.models.Depoimento;
+import com.challenge.jornadamilhasapi.services.DepoimentoService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/depoimentos")
+public class DepoimentoController {
+
+    @Autowired
+    private DepoimentoService depoimentoService;
+
+    @PostMapping
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroDepoimentoDTO dados) {
+        DadosDetalhamentoDepoimentoDTO detalhamento = depoimentoService.save(dados);
+        return ResponseEntity.status(HttpStatus.CREATED).body(detalhamento);
+    }
+
+    @GetMapping
+    public ResponseEntity listaTodos() {
+        List<Depoimento> depoimentos = depoimentoService.findall();
+        return ResponseEntity.status(HttpStatus.OK).body(depoimentos);
+    }
+}
