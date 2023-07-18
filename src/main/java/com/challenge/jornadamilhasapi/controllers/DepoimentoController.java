@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/depoimentos")
@@ -28,11 +29,22 @@ public class DepoimentoController {
     @GetMapping
     public ResponseEntity listaTodos() {
         List<Depoimento> depoimentos = depoimentoService.findall();
-
         if(depoimentos.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum depoimento cadastrado.");
         }
-
         return ResponseEntity.status(HttpStatus.OK).body(depoimentos);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity listaUm(@PathVariable Integer id) {
+        Optional<Depoimento> depoimento = depoimentoService.findById(id);
+        if(depoimento.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum depoimento encontrado com esse id.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(depoimento);
+    }
+
+
+
+
 }
