@@ -68,4 +68,10 @@ public class DepoimentoController {
         depoimentoService.delete(depoimento.get());
         return ResponseEntity.status(HttpStatus.OK).body("Depoimento deletado com sucesso.");
     }
+
+    @GetMapping("/depoimentos-home")
+    public ResponseEntity depoimentosAleatorios() {
+        List<Depoimento> depoimentosHome = depoimentoService.getDepoimentosHome();
+        return ResponseEntity.ok(depoimentosHome);
+    }
 }

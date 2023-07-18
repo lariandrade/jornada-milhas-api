@@ -44,4 +44,7 @@ public class DepoimentoService {
         depoimentoRepository.delete(depoimento);
     }
 
+    public List<Depoimento> getDepoimentosHome() {
+        return depoimentoRepository.depoimentosAleatoriosHome();
+    }
 }
