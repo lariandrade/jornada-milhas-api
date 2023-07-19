@@ -118,5 +118,4 @@ class DepoimentoControllerTest {
         var response = mvc.perform(delete("/depoimentos/4")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
-
 }
