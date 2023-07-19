@@ -1,7 +1,6 @@
 package com.challenge.jornadamilhasapi.dtos;
 
 import com.challenge.jornadamilhasapi.models.Depoimento;
-import jakarta.validation.constraints.NotBlank;
 
 public record DadosDetalhamentoDepoimentoDTO(Integer id, String depoimento, String autor) {
 
