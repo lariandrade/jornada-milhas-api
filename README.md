@@ -23,7 +23,71 @@ O layout da aplicação está disponível neste link: <a href="https://www.figma
 ### Depoimentos
 ![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/6a52ce5f-0675-44d5-a189-8bdc2b5a37fb)
 
+### POST /depoimentos
+Recebe o depoimento, nome e foto do autor.
+> Exemplo de corpo da requisição:
 
+```
+{
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Execelente plataforma",
+    "autor": "Larissa Andrade"
+}
+```
+
+### GET /depoimentos
+Lista todos os depoimentos cadastrados.
+> Exemplo de retorno da requisição:
+
+```
+[
+  {
+    "id": 1,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Plataforma confiavél.",
+    "autor": "Rodrigo Soares"
+  },
+  {
+    "id": 2,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Execelente plataforma",
+    "autor": "Larissa Andrade"
+  }
+]
+```
+### GET /depoimentos/{id}
+Lista depoimento referente ao id informado.
+> Exemplo: depoimentos/2
+
+```
+{
+    "id": 2,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Execelente plataforma",
+    "autor": "Larissa Andrade"
+}
+```
+
+### PUT /depoimentos/{id}
+Atualiza depoimento referente ao id informado.
+> Exemplo: depoimentos/2
+
+```
+{
+    "depoimento": "Execelente plataforma de viagens"
+}
+```
+> Retorno da requisição:
+```
+{
+    "id": 2,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Execelente plataforma de viagens",
+    "autor": "Larissa Andrade"
+}
+```
+### DELETE /depoimentos/{id}
+Deleta depoimento referente ao id informado.
 
 ## ▶️ Rodar a aplicação
 
