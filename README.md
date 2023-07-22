@@ -37,7 +37,7 @@ Recebe o depoimento, nome e foto do autor.
 
 ### GET /depoimentos
 Lista todos os depoimentos cadastrados.
-> Exemplo de retorno da requisição:
+> Exemplo: /depoimentos?page=0&size=2
 
 ```
 [
