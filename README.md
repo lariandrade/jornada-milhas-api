@@ -89,6 +89,33 @@ Atualiza depoimento referente ao id informado.
 ### DELETE /depoimentos/{id}
 Deleta depoimento referente ao id informado.
 
+### GET /depoimentos/depoimentos-home
+Lista três depoimentos aleatorios.
+> Exemplo de retorno da requisição:
+
+```
+[
+  {
+    "id": 1,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Plataforma confiavél.",
+    "autor": "Rodrigo Soares"
+  },
+  {
+    "id": 2,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Execelente plataforma",
+    "autor": "Larissa Andrade"
+  },
+  {
+    "id": 10,
+    "foto": "https://url_da_imagem.jpg",
+    "depoimento": "Recomendo fortemente!",
+    "autor": "Talita Matos"
+  }
+]
+```
+
 ## ▶️ Rodar a aplicação
 
 1. Baixe o projeto:
