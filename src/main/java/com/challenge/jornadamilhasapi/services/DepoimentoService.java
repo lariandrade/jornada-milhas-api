@@ -6,6 +6,8 @@ import com.challenge.jornadamilhasapi.dtos.DadosDetalhamentoDepoimentoDTO;
 import com.challenge.jornadamilhasapi.models.Depoimento;
 import com.challenge.jornadamilhasapi.repositories.DepoimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +25,8 @@ public class DepoimentoService {
         return new DadosDetalhamentoDepoimentoDTO(depoimento);
     }
 
-    public List<Depoimento> findall() {
-        return depoimentoRepository.findAll();
+    public Page<Depoimento> findAll(Pageable pageable) {
+        return depoimentoRepository.findAll(pageable);
     }
 
     public Optional<Depoimento> findById(Integer id) {
