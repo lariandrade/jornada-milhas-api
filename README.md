@@ -36,7 +36,7 @@ Recebe o depoimento, nome e foto do autor.
 ```
 
 ### GET /depoimentos
-Lista todos os depoimentos cadastrados.
+Lista todos os depoimentos cadastrados ou, se preferir, pode filtar usando os parametros `page` e `size`.
 > Exemplo: /depoimentos?page=0&size=2
 
 ```
