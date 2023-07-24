@@ -1,8 +1,8 @@
 package com.challenge.jornadamilhasapi.controllers;
 
-import com.challenge.jornadamilhasapi.dtos.DadosAtualizacaoDepoimento;
-import com.challenge.jornadamilhasapi.dtos.DadosCadastroDepoimentoDTO;
-import com.challenge.jornadamilhasapi.dtos.DadosDetalhamentoDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosAtualizacaoDepoimento;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosCadastroDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosDetalhamentoDepoimentoDTO;
 import com.challenge.jornadamilhasapi.models.Depoimento;
 import com.challenge.jornadamilhasapi.services.DepoimentoService;
 import io.swagger.v3.oas.annotations.Operation;

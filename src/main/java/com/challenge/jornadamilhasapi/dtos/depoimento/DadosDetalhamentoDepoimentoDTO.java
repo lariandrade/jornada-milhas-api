@@ -1,4 +1,4 @@
-package com.challenge.jornadamilhasapi.dtos;
+package com.challenge.jornadamilhasapi.dtos.depoimento;
 
 import com.challenge.jornadamilhasapi.models.Depoimento;
 

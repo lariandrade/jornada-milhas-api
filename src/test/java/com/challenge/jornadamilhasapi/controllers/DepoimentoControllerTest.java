@@ -1,8 +1,8 @@
 package com.challenge.jornadamilhasapi.controllers;
 
-import com.challenge.jornadamilhasapi.dtos.DadosAtualizacaoDepoimento;
-import com.challenge.jornadamilhasapi.dtos.DadosCadastroDepoimentoDTO;
-import com.challenge.jornadamilhasapi.dtos.DadosDetalhamentoDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosAtualizacaoDepoimento;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosCadastroDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosDetalhamentoDepoimentoDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ class DepoimentoControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
 
         var jsonEsperado = dadosDetalhamentoDepoimentoDTOJson.write(
-                new DadosDetalhamentoDepoimentoDTO(9, "depoimento teste", "larissa")).getJson();
+                new DadosDetalhamentoDepoimentoDTO(9, "depoimento teste", "larissa", "url foto")).getJson();
 
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
@@ -100,7 +100,7 @@ class DepoimentoControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         var jsonEsperado = dadosDetalhamentoDepoimentoDTOJson.write(
-                new DadosDetalhamentoDepoimentoDTO(1, "depoimento teste status code", "larissa")).getJson();
+                new DadosDetalhamentoDepoimentoDTO(1, "depoimento teste status code", "larissa", "url foto")).getJson();
 
         assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }

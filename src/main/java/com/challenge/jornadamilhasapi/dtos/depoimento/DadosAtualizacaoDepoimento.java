@@ -1,4 +1,4 @@
-package com.challenge.jornadamilhasapi.dtos;
+package com.challenge.jornadamilhasapi.dtos.depoimento;
 
 import jakarta.validation.constraints.NotBlank;
 
