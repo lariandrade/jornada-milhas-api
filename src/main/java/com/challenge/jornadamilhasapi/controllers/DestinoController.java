@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -42,11 +43,11 @@ public class DestinoController {
         return ResponseEntity.status(HttpStatus.OK).body(destinosPaginados);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity listarUm(@PathVariable Integer id) {
-        Optional<Destino> destino = destinoService.findById(id);
+    @GetMapping(params = "nome")
+    public ResponseEntity listarUm(@RequestParam String nome) {
+        List<Destino> destino = destinoService.findByNome(nome);
         if(destino.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum destino encontrado com esse id.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum destino foi encontrado.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(destino);
     }
