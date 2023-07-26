@@ -1,11 +1,8 @@
 package com.challenge.jornadamilhasapi.controllers;
 
-import com.challenge.jornadamilhasapi.dtos.depoimento.DadosAtualizacaoDepoimento;
-import com.challenge.jornadamilhasapi.dtos.depoimento.DadosDetalhamentoDepoimentoDTO;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosAtualizacaoDestino;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosCadastroDestinoDTO;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosDetalhamentoDestinoDTO;
-import com.challenge.jornadamilhasapi.models.Depoimento;
 import com.challenge.jornadamilhasapi.models.Destino;
 import com.challenge.jornadamilhasapi.services.DestinoService;
 import jakarta.validation.Valid;

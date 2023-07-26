@@ -3,7 +3,6 @@ package com.challenge.jornadamilhasapi.models;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosAtualizacaoDestino;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosCadastroDestinoDTO;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +30,6 @@ public class Destino {
         this.preco = dados.preco().setScale(2, RoundingMode.HALF_EVEN);
     }
 
-
     public void atualizarInformacoes(DadosAtualizacaoDestino dados) {
         if (dados.foto() != null) {
             this.foto = dados.foto();
@@ -41,7 +39,7 @@ public class Destino {
             this.nome = dados.nome();
         }
 
-        if (dados.preco() != null) {
+        if (dados.preco() != null && dados.preco() != BigDecimal.ZERO) {
             this.preco = dados.preco();
         }
     }
