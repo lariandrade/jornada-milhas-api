@@ -1,6 +1,6 @@
 package com.challenge.jornadamilhasapi.models;
 
-import com.challenge.jornadamilhasapi.dtos.DadosCadastroDepoimentoDTO;
+import com.challenge.jornadamilhasapi.dtos.depoimento.DadosCadastroDepoimentoDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;

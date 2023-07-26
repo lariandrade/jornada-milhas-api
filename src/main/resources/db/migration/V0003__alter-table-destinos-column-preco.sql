@@ -1,0 +1,1 @@
+ALTER TABLE destinos MODIFY preco DECIMAL(10, 2);
