@@ -183,7 +183,7 @@ Atualiza destino referente ao id informado.
     "preco": 9345.30
 }
 ```
-### DELETE /depoimentos/{id}
+### DELETE /destinos/{id}
 Deleta destino referente ao id informado.
 
 
