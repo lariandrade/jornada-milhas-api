@@ -15,7 +15,7 @@ O layout da aplicação está disponível neste link: <a href="https://www.figma
 
 ## Funcionalidades
 - ✅ CRUD de Depoimentos
-- 🚧 CRUD de Destinos
+- ✅ CRUD de Destinos
 - 🚧 Integração com IA
 
 ## Endpoints
@@ -115,6 +115,76 @@ Lista três depoimentos aleatorios.
   }
 ]
 ```
+
+### Destinos
+
+![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/ce01db10-9ee9-4c28-8ccc-e38238adbc0f)
+
+### POST /destinos
+Recebe o nome, preço e foto.
+> Exemplo de corpo da requisição:
+
+```
+{
+    "foto": "https://url_da_imagem.jpg",
+    "nome": "Japao",
+    "preco": 10350
+}
+```
+
+### GET /destinos/todos
+Lista todos os destinos cadastrados ou, se preferir, pode filtar usando os parametros `page` e `size`.
+> Exemplo: /destinos/todos?page=0&size=2
+
+```
+[
+  {
+    "id": 1,
+    "foto": "url_da_imagem",
+    "nome": "Paris",
+    "preco": 9500.5
+  },
+  {
+    "id": 2,
+    "foto": "url_da_imagem",
+    "nome": "Nova York",
+    "preco": 10350.9
+  }
+]
+```
+### GET /destinos/
+Lista destino referente ao nome informado.
+> Exemplo: destinos?nome=Paris
+
+```
+{
+    "id": 1,
+    "foto": "url_da_imagem",
+    "nome": "Paris",
+    "preco": 9500.5
+}
+```
+### PUT /destinos/{id}
+Atualiza destino referente ao id informado.
+> Exemplo: destinos/1
+
+```
+{
+    "preco": 9345.30
+}
+```
+> Retorno da requisição:
+```
+{
+    "id": 1,
+    "foto": "url_da_imagem",
+    "nome": "Paris",
+    "preco": 9345.30
+}
+```
+### DELETE /depoimentos/{id}
+Deleta destino referente ao id informado.
+
 
 ## ▶️ Rodar a aplicação
 
