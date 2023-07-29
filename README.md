@@ -21,7 +21,8 @@ O layout da aplicação está disponível neste link: <a href="https://www.figma
 ## Endpoints
 
 ### Depoimentos
-![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/6a52ce5f-0675-44d5-a189-8bdc2b5a37fb)
+![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/3a462a70-ce86-48bf-b2c2-48b1208da7ff)
+
 
 ### POST /depoimentos
 Recebe o depoimento, nome e foto do autor.
@@ -117,8 +118,8 @@ Lista três depoimentos aleatorios.
 ```
 
 ### Destinos
+![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/e941e37f-2a2e-4340-9630-d8d600ce7322)
 
-![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/ce01db10-9ee9-4c28-8ccc-e38238adbc0f)
 
 ### POST /destinos
 Recebe o nome, preço e foto.
