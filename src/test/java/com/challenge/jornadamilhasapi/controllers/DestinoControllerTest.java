@@ -64,21 +64,21 @@ class DestinoControllerTest {
     @Test
     @DisplayName("Deveria devolver codigo http 200 e todos destinos existentes")
     void listarTodos_cenario01() throws Exception {
-        var response = mvc.perform(get("/destinos")).andReturn().getResponse();
+        var response = mvc.perform(get("/destinos/todos")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
     @Test
     @DisplayName("Deveria devolver codigo http 404 ao informar nome invalido")
-    void listarPorID_cenario01() throws Exception {
+    void listarPorNome_cenario01() throws Exception {
         var response = mvc.perform(get("/destinos?nome=Jappao")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 
     @Test
     @DisplayName("Deveria devolver codigo http 200 e listar destinos")
-    void listarPorID_cenario02() throws Exception {
-        var response = mvc.perform(get("/destinos")).andReturn().getResponse();
+    void listarPorNome_cenario02() throws Exception {
+        var response = mvc.perform(get("/destinos?nome=Japao")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 
