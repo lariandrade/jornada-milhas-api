@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-@Tag(name="Destinos")
+@Tag(name = "Destinos")
 @RestController
 @RequestMapping("/destinos")
 public class DestinoController {
@@ -55,7 +55,7 @@ public class DestinoController {
             @ApiResponse(responseCode = "404", description = "Nenhum destino cadastrado", content = @Content),
     })
     @GetMapping("/todos")
-    public ResponseEntity listarTodos(@PageableDefault(sort={"id"}) Pageable pageable) {
+    public ResponseEntity listarTodos(@PageableDefault(sort = {"id"}) Pageable pageable) {
         Page<Destino> destinosPaginados = destinoService.findAll(pageable);
         if (destinosPaginados.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum destino cadastrado.");
@@ -63,7 +63,7 @@ public class DestinoController {
         return ResponseEntity.status(HttpStatus.OK).body(destinosPaginados);
     }
 
-   @Operation(summary = "Listar por nome", description = "Serão listados os destinos referente ao nome informado")
+    @Operation(summary = "Listar por nome", description = "Serão listados os destinos referente ao nome informado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Destino listado",
                     content = @Content(mediaType = "application/json",
@@ -73,8 +73,24 @@ public class DestinoController {
     @GetMapping(params = "nome")
     public ResponseEntity listarPorNome(@RequestParam String nome) {
         List<Destino> destino = destinoService.findByNome(nome);
-        if(destino.isEmpty()) {
+        if (destino.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum destino foi encontrado.");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(destino);
+    }
+
+    @Operation(summary = "Listar por id", description = "Serão listados os destinos referente ao id informado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Destino listado",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DadosDetalhamentoDestinoDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Nenhum destino foi encontrado", content = @Content),
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity listarPorID(@PathVariable Integer id) {
+        Optional<Destino> destino = destinoService.findById(id);
+        if(destino.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum destino foi encontrado com esse id.");
         }
         return ResponseEntity.status(HttpStatus.OK).body(destino);
     }
@@ -113,4 +129,5 @@ public class DestinoController {
         destinoService.delete(destino.get());
         return ResponseEntity.status(HttpStatus.OK).body("Destino deletado com sucesso.");
     }
+
 }
