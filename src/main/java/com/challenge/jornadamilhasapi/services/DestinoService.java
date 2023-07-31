@@ -19,9 +19,22 @@ public class DestinoService {
     @Autowired
     private DestinoRepository destinoRepository;
 
+    @Autowired
+    private ChatService chatService;
+
+
     public DadosDetalhamentoDestinoDTO save(DadosCadastroDestinoDTO dados) {
+
         Destino destino = new Destino(dados);
-        destinoRepository.save(destino);
+
+        dados.textoDescritivo();
+
+        if (dados.textoDescritivo() == null) {
+            String textoGerado = chatService.gerarTexto(dados.nome());
+            destino.setTextoDescritivo(textoGerado);
+        }
+
+        //  destinoRepository.save(destino);
         return new DadosDetalhamentoDestinoDTO(destino);
     }
 
