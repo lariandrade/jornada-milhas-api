@@ -1,6 +1,5 @@
 package com.challenge.jornadamilhasapi.dtos.destino;
 
-import com.challenge.jornadamilhasapi.models.Depoimento;
 import com.challenge.jornadamilhasapi.models.Destino;
 
 import java.math.BigDecimal;
