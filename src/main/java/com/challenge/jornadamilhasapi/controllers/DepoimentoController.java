@@ -18,13 +18,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
-@Tag(name="Depoimentos")
+@Tag(name = "Depoimentos")
 @RestController
 @RequestMapping("/depoimentos")
 public class DepoimentoController {
@@ -35,30 +33,28 @@ public class DepoimentoController {
     @Operation(summary = "Cadastrar", description = "será cadastrado um novo depoimento")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
-                        description = "Depoimento cadastrado",
-                        content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = DadosDetalhamentoDepoimentoDTO.class))),
+                    description = "Depoimento cadastrado",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = DadosDetalhamentoDepoimentoDTO.class))),
             @ApiResponse(responseCode = "400", description = "Informações inválidas", content = @Content),
     })
     @PostMapping
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroDepoimentoDTO dados) {
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoDepoimentoDTO> cadastrar(@RequestBody @Valid DadosCadastroDepoimentoDTO dados) {
         DadosDetalhamentoDepoimentoDTO detalhamento = depoimentoService.save(dados);
         return ResponseEntity.status(HttpStatus.CREATED).body(detalhamento);
     }
 
-    @Operation(summary = "Listar tudo", description = "Serão listados todos os depoimentos.")
+    @Operation(summary = "Listar todos", description = "Serão listados todos os depoimentos.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Depoimentos listados",
-                            content = @Content(mediaType = "application/json",
+                    content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = DadosDetalhamentoDepoimentoDTO.class))),
             @ApiResponse(responseCode = "404", description = "Nenhum depoimento cadastrado", content = @Content),
     })
     @GetMapping
-    public ResponseEntity listarTodos(@PageableDefault(sort={"id"})Pageable pageable) {
-        Page<Depoimento> depoimentosPaginados = depoimentoService.findAll(pageable);
-        if (depoimentosPaginados.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum depoimento cadastrado.");
-        }
+    public ResponseEntity<Page<DadosDetalhamentoDepoimentoDTO>> listarTodos(@PageableDefault(sort = {"id"}) Pageable pageable) {
+        var depoimentosPaginados = depoimentoService.findAll(pageable).map(DadosDetalhamentoDepoimentoDTO::new);
         return ResponseEntity.status(HttpStatus.OK).body(depoimentosPaginados);
     }
 
@@ -70,12 +66,8 @@ public class DepoimentoController {
             @ApiResponse(responseCode = "404", description = "Nenhum depoimento cadastrado com esse ID", content = @Content),
     })
     @GetMapping("/{id}")
-    public ResponseEntity listarUm(@PathVariable Integer id) {
-        Optional<Depoimento> depoimento = depoimentoService.findById(id);
-        if(depoimento.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum depoimento encontrado com esse id.");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(depoimento);
+    public ResponseEntity<DadosDetalhamentoDepoimentoDTO> listarUm(@PathVariable Integer id) {
+        return depoimentoService.findById(id);
     }
 
     @Operation(summary = "Atualizar", description = "Será atualizado o depoimento referente ao ID informado")
@@ -86,42 +78,33 @@ public class DepoimentoController {
             @ApiResponse(responseCode = "404", description = "Nenhum depoimento cadastrado com esse ID", content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity atualizar(@PathVariable Integer id, @RequestBody @Valid DadosAtualizacaoDepoimento dados) {
-        ResponseEntity<String> response;
-        try {
-            DadosDetalhamentoDepoimentoDTO dadosDetalhamentoCadastro = depoimentoService.update(id, dados);
-            return ResponseEntity.status(HttpStatus.OK).body(dadosDetalhamentoCadastro);
-
-        } catch (NoSuchElementException e) {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("Depoimento não encontrado");
-        }
-        return response;
+    @Transactional
+    public ResponseEntity<DadosDetalhamentoDepoimentoDTO> atualizar(@PathVariable Integer id, @RequestBody @Valid DadosAtualizacaoDepoimento dados) {
+        DadosDetalhamentoDepoimentoDTO dadosAtualizados = depoimentoService.update(id, dados);
+        return ResponseEntity.status(HttpStatus.OK).body(dadosAtualizados);
     }
 
     @Operation(summary = "Deletar", description = "Será deletado o depoimento referente ao ID informado")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Depoimento deletado", content = @Content),
+            @ApiResponse(responseCode = "204", description = "Depoimento deletado", content = @Content),
             @ApiResponse(responseCode = "404", description = "Nenhum depoimento cadastrado com esse ID", content = @Content),
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable Integer id) {
-        Optional<Depoimento> depoimento = depoimentoService.findById(id);
-        if (depoimento.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Depoimento não encontrado");
-        }
-        depoimentoService.delete(depoimento.get());
-        return ResponseEntity.status(HttpStatus.OK).body("Depoimento deletado com sucesso.");
+    @Transactional
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        depoimentoService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @Operation(summary = "Listar depoimentos aleatorios", description = "Serão listados 3 depoimentos aleatorios")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Depoimentos listados",
                     content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = DadosDetalhamentoDepoimentoDTO.class)))
+                            schema = @Schema(implementation = DadosDetalhamentoDepoimentoDTO.class)))
 
     })
     @GetMapping("/depoimentos-home")
-    public ResponseEntity depoimentosAleatorios() {
+    public ResponseEntity<List<Depoimento>> depoimentosAleatorios() {
         List<Depoimento> depoimentosHome = depoimentoService.getDepoimentosHome();
         return ResponseEntity.ok(depoimentosHome);
     }

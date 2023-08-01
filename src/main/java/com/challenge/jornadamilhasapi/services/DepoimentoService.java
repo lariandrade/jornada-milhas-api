@@ -8,16 +8,22 @@ import com.challenge.jornadamilhasapi.repositories.DepoimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DepoimentoService {
 
     @Autowired
     private DepoimentoRepository depoimentoRepository;
+
+    private Depoimento getDepoimentoById(Integer id) {
+        return depoimentoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Nenhum depoimento foi encontrado com esse id."));
+    }
 
     public DadosDetalhamentoDepoimentoDTO save(DadosCadastroDepoimentoDTO dados) {
         Depoimento depoimento = new Depoimento(dados);
@@ -29,20 +35,20 @@ public class DepoimentoService {
         return depoimentoRepository.findAll(pageable);
     }
 
-    public Optional<Depoimento> findById(Integer id) {
-        return depoimentoRepository.findById(id);
+    public ResponseEntity<DadosDetalhamentoDepoimentoDTO> findById(Integer id) {
+        Depoimento depoimento = getDepoimentoById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(new DadosDetalhamentoDepoimentoDTO(depoimento));
     }
 
     public DadosDetalhamentoDepoimentoDTO update(Integer id, DadosAtualizacaoDepoimento dados) {
-        Optional<Depoimento> depoimentoOP = depoimentoRepository.findById(id);
-        Depoimento depoimento = depoimentoOP.get();
+        Depoimento depoimento = getDepoimentoById(id);
         depoimento.setDepoimento(dados.depoimento());
         depoimentoRepository.save(depoimento);
-
         return new DadosDetalhamentoDepoimentoDTO(depoimento);
     }
 
-    public void delete(Depoimento depoimento) {
+    public void delete(Integer id) {
+        Depoimento depoimento = getDepoimentoById(id);
         depoimentoRepository.delete(depoimento);
     }
 
