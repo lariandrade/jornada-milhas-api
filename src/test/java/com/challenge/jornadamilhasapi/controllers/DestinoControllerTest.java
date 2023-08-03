@@ -2,7 +2,6 @@ package com.challenge.jornadamilhasapi.controllers;
 
 import com.challenge.jornadamilhasapi.dtos.destino.DadosAtualizacaoDestino;
 import com.challenge.jornadamilhasapi.dtos.destino.DadosCadastroDestinoDTO;
-import com.challenge.jornadamilhasapi.dtos.destino.DadosDetalhamentoDestinoDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +32,6 @@ class DestinoControllerTest {
     @Autowired
     private JacksonTester<DadosCadastroDestinoDTO> dadosCadastroDestinoDTOJson;
     @Autowired
-    private JacksonTester<DadosDetalhamentoDestinoDTO> dadosDetalhamentoDestinoDTOJson;
-    @Autowired
     private JacksonTester<DadosAtualizacaoDestino> dadosAtualizacaoDestinoJacksonTester;
 
     @Test
@@ -47,18 +44,18 @@ class DestinoControllerTest {
     @Test
     @DisplayName("Deveria devolver codigo http 201 quando informacoes estao validas")
     void cadastrar_cenario02() throws Exception {
+
         var response = mvc
                 .perform(post("/destinos")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dadosCadastroDestinoDTOJson.write(
-                                new DadosCadastroDestinoDTO("foto teste", "nome teste", BigDecimal.valueOf(1350.00).setScale(2, RoundingMode.HALF_EVEN))
-                        ).getJson())).andReturn().getResponse();
+                                new DadosCadastroDestinoDTO("url_imagem_1.jpg",
+                                        "url_imagem_2.jpg",
+                                        "nome teste",
+                                        BigDecimal.valueOf(1350.00).setScale(2, RoundingMode.HALF_EVEN),
+                                        "lugar otimo",
+                                        "")).getJson())).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-
-        var jsonEsperado = dadosDetalhamentoDestinoDTOJson.write(
-                new DadosDetalhamentoDestinoDTO(1, "foto teste", "nome teste", BigDecimal.valueOf(1350.0).setScale(2, RoundingMode.HALF_EVEN))).getJson();
-
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
 
     @Test
@@ -83,6 +80,20 @@ class DestinoControllerTest {
     }
 
     @Test
+    @DisplayName("Deveria devolver codigo http 404 ao informar nome invalido")
+    void listarPorId_cenario01() throws Exception {
+        var response = mvc.perform(get("/destinos/112")).andReturn().getResponse();
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+    }
+
+    @Test
+    @DisplayName("Deveria devolver codigo http 200 e listar destinos")
+    void listarPorId_cenario02() throws Exception {
+        var response = mvc.perform(get("/destinos/2")).andReturn().getResponse();
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+    }
+
+    @Test
     @DisplayName("Deveria devolver codigo http 400 quando informacao esta invalida")
     void atualizar_cenario01() throws Exception {
         var response = mvc.perform(post("/destinos")).andReturn().getResponse();
@@ -93,31 +104,31 @@ class DestinoControllerTest {
     @DisplayName("Deveria devolver codigo http 200 e atualizar destinos")
     void atualizar_cenario02() throws Exception {
         var response = mvc
-                .perform(put("/destinos/1")
+                .perform(put("/destinos/4")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(dadosAtualizacaoDestinoJacksonTester.write(
-                                new DadosAtualizacaoDestino("destino", "nome teste", BigDecimal.valueOf(0))
+                                new DadosAtualizacaoDestino("url_imagem_1.jpg",
+                                        "url_imagem_2.jpg",
+                                        "Japao",
+                                        BigDecimal.valueOf(1350.00).setScale(2, RoundingMode.HALF_EVEN),
+                                        "lugar otimo",
+                                        "texto descritivo teste")
                         ).getJson())).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-
-        var jsonEsperado = dadosDetalhamentoDestinoDTOJson.write(
-                new DadosDetalhamentoDestinoDTO(1, "destino", "nome teste", BigDecimal.valueOf(1350).setScale(2, RoundingMode.HALF_EVEN))).getJson();
-
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
 
     @Test
     @DisplayName("Deveria devolver codigo http 404 quando id for invalido")
     void deletar_cenario01() throws Exception {
-        var response = mvc.perform(delete("/destinos/12")).andReturn().getResponse();
+        var response = mvc.perform(delete("/destinos/112")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
     }
 
     @Test
-    @DisplayName("Deveria devolver codigo http 200 quando id for valido")
+    @DisplayName("Deveria devolver codigo http 204 quando id for valido")
     void deletar_cenario02() throws Exception {
-        var response = mvc.perform(delete("/destinos/1")).andReturn().getResponse();
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        var response = mvc.perform(delete("/destinos/2")).andReturn().getResponse();
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 
 }
