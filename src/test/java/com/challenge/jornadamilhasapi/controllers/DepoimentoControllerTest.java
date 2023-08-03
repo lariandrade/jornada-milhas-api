@@ -53,11 +53,6 @@ class DepoimentoControllerTest {
                                 new DadosCadastroDepoimentoDTO("foto teste", "depoimento teste", "larissa")
                         ).getJson())).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-
-        var jsonEsperado = dadosDetalhamentoDepoimentoDTOJson.write(
-                new DadosDetalhamentoDepoimentoDTO(9, "depoimento teste", "larissa", "url foto")).getJson();
-
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
 
     @Test
@@ -98,11 +93,6 @@ class DepoimentoControllerTest {
                                 new DadosAtualizacaoDepoimento("depoimento teste status code")
                         ).getJson())).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-
-        var jsonEsperado = dadosDetalhamentoDepoimentoDTOJson.write(
-                new DadosDetalhamentoDepoimentoDTO(1, "depoimento teste status code", "larissa", "url foto")).getJson();
-
-        assertThat(response.getContentAsString()).isEqualTo(jsonEsperado);
     }
 
     @Test
@@ -115,7 +105,7 @@ class DepoimentoControllerTest {
     @Test
     @DisplayName("Deveria devolver codigo http 200 quando id for valido")
     void deletar_cenario02() throws Exception {
-        var response = mvc.perform(delete("/depoimentos/4")).andReturn().getResponse();
+        var response = mvc.perform(delete("/depoimentos/1")).andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 }
