@@ -3,7 +3,7 @@
     <h1 align="center">API REST</h1>
 </div>
 <div align="center">
-    <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=yellow&style=for-the-badge"/>
+    <img src="http://img.shields.io/static/v1?label=STATUS&message=FINALIZADO&color=GREEN&style=for-the-badge"/>
 </div>
 
 ## Descrição do Projeto
