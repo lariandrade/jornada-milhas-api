@@ -222,7 +222,6 @@ Atualiza destino referente ao id informado.
 ### DELETE /destinos/{id}
 Deleta destino referente ao id informado.
 
-
 ## ▶️ Rodar a aplicação
 
 1. Baixe o projeto:
@@ -237,6 +236,14 @@ No arquivo `application.properties`, localize as configurações de acesso ao ba
 ```
 spring.datasource.username=<insira seu nome de usuario>
 spring.datasource.password=<insira sua senha>
+```
+3. Configurando Token OpenAI
+
+O token OpenAI é essencial para possibilitar a utilização do ChatGPT e deve ser configurado no mesmo arquivo em que o banco de dados foi definido. 
+Para garantir a segurança, é recomendavél o uso de variáveis de ambiente.
+
+```
+openai.api.key=${TOKEN_GPT}
 ```
 
 A API poderá ser acessada em [localhost:8080](http://localhost:8080)
