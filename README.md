@@ -21,8 +21,7 @@ O layout da aplicação está disponível neste link: <a href="https://www.figma
 ## Endpoints
 
 ### Depoimentos
-![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/3a462a70-ce86-48bf-b2c2-48b1208da7ff)
-
+![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/84f58eb3-6097-4fe0-ad9b-25c91af0299e)
 
 ### POST /depoimentos
 Recebe o depoimento, nome e foto do autor.
@@ -45,7 +44,7 @@ Lista todos os depoimentos cadastrados ou, se preferir, pode filtar usando os pa
   {
     "id": 1,
     "foto": "https://url_da_imagem.jpg",
-    "depoimento": "Plataforma confiavél.",
+    "depoimento": "Plataforma confiável.",
     "autor": "Rodrigo Soares"
   },
   {
@@ -91,7 +90,7 @@ Atualiza depoimento referente ao id informado.
 Deleta depoimento referente ao id informado.
 
 ### GET /depoimentos/depoimentos-home
-Lista três depoimentos aleatorios.
+Lista três depoimentos aleatorios para exibir na home.
 > Exemplo de retorno da requisição:
 
 ```
@@ -118,8 +117,7 @@ Lista três depoimentos aleatorios.
 ```
 
 ### Destinos
-![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/e941e37f-2a2e-4340-9630-d8d600ce7322)
-
+![image](https://github.com/lariandrade/jornada-milhas-api/assets/44838761/33c26ed8-d97c-4ff3-94e6-33b0f86e121b)
 
 ### POST /destinos
 Recebe o nome, preço e foto.
@@ -127,9 +125,12 @@ Recebe o nome, preço e foto.
 
 ```
 {
-    "foto": "https://url_da_imagem.jpg",
+    "foto1": "https://url_da_imagem1.jpg",
+    "foto2": "https://url_da_imagem2.jpg",
     "nome": "Japao",
-    "preco": 10350
+    "preco": 10350,
+    "meta": "Terceira maior economia do mundo!",
+    "textoDescritivo": ""
 }
 ```
 
