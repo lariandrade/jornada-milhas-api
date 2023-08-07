@@ -7,7 +7,7 @@
 </div>
 
 ## Descrição do Projeto
-O desafio proposto pela Alura na 7ª Edição do Challenge Backend é desenvolver em 4 semanas a estrutura do backend para um site de viagens. A API REST terá recursos para gerenciar depoimentos, destinos de viagem e seus respectivos valores. O projeto visa proporcionar uma experiência completa e interativa aos usuários, permitindo que compartilhem suas experiências de viagem e descubram novos destinos emocionantes. 
+O desafio proposto pela Alura na 7ª Edição do Challenge Backend é desenvolver em 4 semanas a estrutura do backend para um site de viagens. A API REST terá recursos para gerenciar depoimentos, destinos de viagens e seus respectivos valores. O projeto visa proporcionar uma experiência completa e interativa aos usuários, permitindo que compartilhem suas experiências de viagem e descubram novos destinos emocionantes. 
 
 ## Layout
 
