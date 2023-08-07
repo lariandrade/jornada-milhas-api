@@ -16,7 +16,7 @@ O layout da aplicação está disponível neste link: <a href="https://www.figma
 ## Funcionalidades
 - ✅ CRUD de Depoimentos
 - ✅ CRUD de Destinos
-- 🚧 Integração com IA
+- ✅ Integração com ChatGPT
 
 ## Endpoints
 
@@ -125,12 +125,20 @@ Recebe o nome, preço e foto.
 
 ```
 {
-    "foto1": "https://url_da_imagem1.jpg",
-    "foto2": "https://url_da_imagem2.jpg",
+    "foto1": "https://url_da_imagem_japao1.jpg",
+    "foto2": "https://url_da_imagem_japao2.jpg",
     "nome": "Japao",
     "preco": 10350,
     "meta": "Terceira maior economia do mundo!",
     "textoDescritivo": ""
+}
+```
+**Obs.: se o atributo "textoDescritivo" estiver em branco, o texto será gerado automaticamente pelo ChatGPT.**
+
+```java
+if (dados.textoDescritivo().isBlank()) {
+    String textoGerado = chatService.gerarTexto(dados.nome());
+    destino.setTextoDescritivo(textoGerado);
 }
 ```
 
@@ -142,15 +150,21 @@ Lista todos os destinos cadastrados ou, se preferir, pode filtar usando os param
 [
   {
     "id": 1,
-    "foto": "url_da_imagem",
+    "foto1": "url_da_imagem_paris1.jpg",
+    "foto2": "url_da_imagem_paris2.jpg",
     "nome": "Paris",
-    "preco": 9500.5
+    "preco": 9500.5,
+    "meta": "Um dos principais centros de finanças!",
+    "textoDescritivo": "Paris é uma das cidades mais incríveis do mundo. Uma mistura única de cultura, moda, gastronomia e beleza. É uma cidade cintilante e cheia de história que vale a pena ser explorada."
   },
   {
     "id": 2,
-    "foto": "url_da_imagem",
-    "nome": "Nova York",
-    "preco": 10350.9
+    "foto1": "https://url_da_imagem_japao1.jpg",
+    "foto2": "https://url_da_imagem_japao2.jpg",
+    "nome": "Japao",
+    "preco": 10350,
+    "meta": "Terceira maior economia do mundo!",
+    "textoDescritivo": "O Japão é um país surpreendente! O povo japonês coloca uma ênfase incrível na cultura tradicional e na tecnologia moderna, que encantam todos os visitantes.
   }
 ]
 ```
@@ -161,9 +175,12 @@ Lista destino referente ao nome informado.
 ```
 {
     "id": 1,
-    "foto": "url_da_imagem",
+    "foto1": "url_da_imagem_paris1.jpg",
+    "foto2": "url_da_imagem_paris2.jpg",
     "nome": "Paris",
-    "preco": 9500.5
+    "preco": 9500.5,
+    "meta": "Um dos principais centros de finanças!",
+    "textoDescritivo": "Paris é uma das cidades mais incríveis do mundo. Uma mistura única de cultura, moda, gastronomia e beleza. É uma cidade cintilante e cheia de história que vale a pena ser explorada."
 }
 ```
 ### PUT /destinos/{id}
@@ -179,9 +196,12 @@ Atualiza destino referente ao id informado.
 ```
 {
     "id": 1,
-    "foto": "url_da_imagem",
+    "foto1": "url_da_imagem_paris1.jpg",
+    "foto2": "url_da_imagem_paris2.jpg",
     "nome": "Paris",
-    "preco": 9345.30
+    "preco": 9345.30,
+    "meta": "Um dos principais centros de finanças!",
+    "textoDescritivo": "Paris é uma das cidades mais incríveis do mundo. Uma mistura única de cultura, moda, gastronomia e beleza. É uma cidade cintilante e cheia de história que vale a pena ser explorada."
 }
 ```
 ### DELETE /destinos/{id}
