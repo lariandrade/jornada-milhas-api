@@ -183,6 +183,21 @@ Lista destino referente ao nome informado.
     "textoDescritivo": "Paris é uma das cidades mais incríveis do mundo. Uma mistura única de cultura, moda, gastronomia e beleza. É uma cidade cintilante e cheia de história que vale a pena ser explorada."
 }
 ```
+### GET /destinos/{id}
+Lista destino referente ao id informado.
+> Exemplo: destinos/2
+
+```
+{
+    "id": 2,
+    "foto1": "https://url_da_imagem_japao1.jpg",
+    "foto2": "https://url_da_imagem_japao2.jpg",
+    "nome": "Japao",
+    "preco": 10350,
+    "meta": "Terceira maior economia do mundo!",
+    "textoDescritivo": "O Japão é um país surpreendente! O povo japonês coloca uma ênfase incrível na cultura tradicional e na tecnologia moderna, que encantam todos os visitantes.
+}
+```
 ### PUT /destinos/{id}
 Atualiza destino referente ao id informado.
 > Exemplo: destinos/1
