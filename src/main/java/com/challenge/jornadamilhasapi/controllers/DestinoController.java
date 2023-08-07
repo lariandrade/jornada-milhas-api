@@ -45,7 +45,7 @@ public class DestinoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(detalhamento);
     }
 
-    @Operation(summary = "Listar tudo", description = "Serão listados todos os destinos.")
+    @Operation(summary = "Listar todos", description = "Serão listados todos os destinos.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Destinos listados",
                     content = @Content(mediaType = "application/json",
