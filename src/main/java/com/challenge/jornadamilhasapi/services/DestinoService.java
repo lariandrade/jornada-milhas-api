@@ -35,9 +35,8 @@ public class DestinoService {
 
     public DadosDetalhamentoDestinoDTO save(DadosCadastroDestinoDTO dados) {
         Destino destino = new Destino(dados);
-        dados.textoDescritivo();
 
-        if (dados.textoDescritivo() == null) {
+        if (dados.textoDescritivo().isBlank()) {
             String textoGerado = chatService.gerarTexto(dados.nome());
             destino.setTextoDescritivo(textoGerado);
         }
